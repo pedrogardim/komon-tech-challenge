@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${euclidTriangle.variable} font-normal flex flex-col h-screen`}
       >
         <Header />
-        <main className="container mx-auto flex-auto grow flex flex-row items-start justify-start">
+        <main className="container mx-auto flex-auto grow flex flex-row items-start justify-start font-euclid-triangle">
           <Sidemenu />
           <div className="flex-auto relative flex place-items-center px-8 py-5">
             {children}
