@@ -38,7 +38,7 @@ export default function RootLayout({
           <Header />
           <main className="container mx-auto flex-auto grow flex flex-row items-start justify-start font-euclid-triangle">
             <Sidemenu />
-            <div className="flex-auto relative flex place-items-center px-8 py-5">
+            <div className="flex-auto relative flex px-8 py-5 h-full justify-start">
               {children}
             </div>
           </main>
