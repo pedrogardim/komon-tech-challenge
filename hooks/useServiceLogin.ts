@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { auth } from '@/services/mockAuth';
+import { SocialProfile } from '@/data/mockProfileData';
 
 const useServiceLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
-  const loginWithService = async (serviceName: string) => {
+  const loginWithService: (
+    serviceName: string
+  ) => Promise<SocialProfile | undefined> = async (serviceName) => {
     setIsLoading(true);
     setError(null);
     try {

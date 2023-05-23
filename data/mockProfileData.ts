@@ -27,6 +27,7 @@ export const mockProfileData = {
     ...commonData,
     username: 'TheWanderlustAdventurer',
     followers: 23541,
+    likes: 335000,
     page_category: 'Travel/Exploration',
     about:
       "Welcome to my official Facebook page! Get inspired by breathtaking destinations, travel tips, and captivating stories. Let's embark on unforgettable adventures together!",
@@ -56,3 +57,11 @@ export const mockProfileData = {
       "Passionate traveler and storyteller with a keen eye for capturing unforgettable moments. Experienced in global exploration, cultural immersion, and sustainable travel practices. Let's connect and create meaningful connections in the travel community!",
   },
 };
+
+export type SocialProfile =
+  | typeof mockProfileData.instagram
+  | typeof mockProfileData.youtube
+  | typeof mockProfileData.facebook
+  | typeof mockProfileData.tiktok
+  | typeof mockProfileData.twitter
+  | typeof mockProfileData.linkedin;
