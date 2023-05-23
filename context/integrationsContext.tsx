@@ -3,6 +3,7 @@ import React, { createContext, useMemo, useState, useContext } from 'react';
 import { SocialProfile } from '@/data/mockProfileData';
 
 export type Integration = {
+  id: string;
   type: string;
   label: string;
   username: string;
