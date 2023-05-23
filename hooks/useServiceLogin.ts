@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { auth } from '@/services/mockAuth';
 
 const useServiceLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -10,8 +11,17 @@ const useServiceLogin = () => {
     try {
       switch (serviceName) {
         case 'instagram':
-          // await auth.signInWithFacebook();
-          break;
+          return await auth.signInWithInstagram();
+        case 'youtube':
+          return await auth.signInWithYouTube();
+        case 'facebook':
+          return await auth.signInWithFacebook();
+        case 'tiktok':
+          return await auth.signInWithTikTok();
+        case 'twitter':
+          return await auth.signInWithTwitter();
+        case 'linkedin':
+          return await auth.signInWithLinkedIn();
         default:
           throw new Error(`Unsupported service: ${serviceName}`);
       }

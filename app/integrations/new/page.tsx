@@ -16,11 +16,13 @@ const NewIntegrationPage: React.FC = () => {
 
   const onServiceButtonClick = async (service: string) => {
     const response = await loginWithService(service);
+    console.log(response);
   };
 
   return (
     <>
       <p className="m-8">Choose the service below to integrate:</p>
+      {isLoading && <p className="m-8">LOADING</p>}
       <div className="grid gap-4 grid-cols-3 grid-rows-2">
         {connectionOptions.map((option) => (
           <button
