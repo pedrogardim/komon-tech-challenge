@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import useServiceLogin from '@/hooks/useServiceLogin';
+import { useIntegrationsContext } from '@/context/integrationsContext';
 import Modal from '@/components/ui/Modal';
 
 const connectionOptions = [
@@ -13,11 +15,15 @@ const connectionOptions = [
 ];
 
 const NewIntegrationPage: React.FC = () => {
+  const router = useRouter();
   const { loginWithService, isLoading } = useServiceLogin();
 
+  const { update } = useIntegrationsContext();
+
   const onServiceButtonClick = async (service: string) => {
-    const response = await loginWithService(service);
-    console.log(response);
+    const userData = await loginWithService(service);
+    update({ newIntegration: { ...userData, type: service } });
+    router.push(`/integrations/new/${service}`);
   };
 
   return (
