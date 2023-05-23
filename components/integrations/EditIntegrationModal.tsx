@@ -32,6 +32,7 @@ const EditIntegrationModal: React.FC<EditIntegrationModalProps> = ({
       setError('Label should not be empty');
       return;
     }
+    //TODO: Mock Endpoint
     update((prev: IntegrationsCtxState) => {
       const newState = { ...prev };
       newState.integrations[itemIndex] = { ...data };
@@ -57,6 +58,18 @@ const EditIntegrationModal: React.FC<EditIntegrationModalProps> = ({
       type="confirm"
     >
       <div className="w-96">
+        <div className="flex items-center border p-2 mb-4">
+          <Image
+            className="mr-2"
+            src={`/icons/${data.type}.svg`}
+            alt={`${data.type} icon`}
+            width={32}
+            height={32}
+          />
+          <span className="text-gray-500 ">
+            <u>{data.username}</u>
+          </span>
+        </div>
         <Input
           value={data.label}
           onChange={(v) => updateValue('label', v)}
@@ -64,6 +77,20 @@ const EditIntegrationModal: React.FC<EditIntegrationModalProps> = ({
           label="Label"
           error={error}
         />
+        <div className="flex items-center mt-4">
+          <input
+            type="checkbox"
+            className="w-5 h-5"
+          />
+          <label className="my-2 ml-2 text-sm">Automatic repost on Komon</label>
+        </div>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            className="w-5 h-5"
+          />
+          <label className="my-2 ml-2 text-sm">Only for members</label>
+        </div>
       </div>
     </Modal>
   );

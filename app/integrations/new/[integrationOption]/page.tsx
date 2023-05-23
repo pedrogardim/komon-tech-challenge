@@ -91,12 +91,26 @@ const NewConnectionPage: React.FC = () => {
         <StatsGrid />
       </div>
       <div className="w-1/2 mt-4">
+        <h1 className="text-xl my-4">Connection Name</h1>
         <Input
           placeholder="Main Instagram, My Secondary YouTube Channel..."
           onChange={(v) => setLabel(v)}
-          label="Integration Label"
           error={error}
         />
+        <div className="flex items-center mt-4">
+          <input
+            type="checkbox"
+            className="w-5 h-5"
+          />
+          <label className="my-2 ml-2 text-sm">Automatic repost on Komon</label>
+        </div>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            className="w-5 h-5"
+          />
+          <label className="my-2 ml-2 text-sm">Only for members</label>
+        </div>
       </div>
       <div className="flex justify-end mt-8">
         <button

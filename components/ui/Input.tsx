@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div>
-      <h1 className="my-2">{label}</h1>
+      <h1 className="text-sm">{label}</h1>
       <div
         className={`relative border-b border-gray-300 mb-4  ${
           error ? 'border-red-500' : 'focus-within:border-gray-500'
