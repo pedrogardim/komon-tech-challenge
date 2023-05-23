@@ -11,12 +11,13 @@ import {
 } from '@/context/integrationsContext';
 
 import { SocialProfile } from '@/data/mockProfileData';
+import Input from '@/components/ui/Input';
 
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();
   const { integrations, newIntegration, update } = useIntegrationsContext();
-  const [label, setLabel] = useState<String>('');
-  const [error, setError] = useState<null | String>(null);
+  const [label, setLabel] = useState<string>('');
+  const [error, setError] = useState<null | string>(null);
 
   const data = newIntegration as Integration & SocialProfile;
 
@@ -60,22 +61,7 @@ const NewConnectionPage: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl my-2">Integration Label</h1>
-      <div
-        className={`relative border-b border-gray-300 w-1/3 mb-4  ${
-          error ? 'border-red-500' : 'focus-within:border-gray-500'
-        }`}
-      >
-        <input
-          className="border-none p-2 text-sm border-b w-full focus:outline-0 rounded-xl"
-          placeholder="Main Instagram, My Secondary YouTube Channel..."
-          onChange={(e) => setLabel(e.target.value)}
-        />
-        <span className="absolute text-xs text-red-500 -bottom-6 left-2">
-          {error}
-        </span>
-      </div>
-      <h1 className="text-xl my-4 mt-10">Profile Info</h1>
+      <h1 className="text-xl my-4">Profile Info</h1>
       <div className="grid grid-cols-4 gap-4 mt-4 p-8 border shadow">
         <div className="flex justify-center items-center">
           <Image
@@ -103,6 +89,14 @@ const NewConnectionPage: React.FC = () => {
           </div>
         </div>
         <StatsGrid />
+      </div>
+      <div className="w-1/2 mt-4">
+        <Input
+          placeholder="Main Instagram, My Secondary YouTube Channel..."
+          onChange={(v) => setLabel(v)}
+          label="Integration Label"
+          error={error}
+        />
       </div>
       <div className="flex justify-end mt-8">
         <button
