@@ -2,21 +2,37 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { formatNumber } from '@/utils/format';
 import StatsGrid from '@/components/integrations/StatsGrid';
 
 import {
   useIntegrationsContext,
+  IntegrationsCtxState,
   Integration,
 } from '@/context/integrationsContext';
 
+import { SocialProfile } from '@/data/mockProfileData';
+
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();
-  const { newIntegration } = useIntegrationsContext();
-  const data = newIntegration as Integration;
+  const { newIntegration, update } = useIntegrationsContext();
+  const data = newIntegration as Integration & SocialProfile;
+
+  const addConnection = () => {
+    const newIntegration = {};
+    update((prev: IntegrationsCtxState) => ({
+      integrations: [...prev.integrations, newIntegration],
+      newIntegration: null,
+    }));
+    router.replace('/integrations');
+  };
+
+  const cancel = () => {
+    update({ newIntegration: null });
+    router.replace('/integrations');
+  };
 
   useEffect(() => {
-    if (!newIntegration) router.replace('/integrations/new');
+    if (!newIntegration) router.replace('/integrations');
   }, [newIntegration, router]);
 
   if (!newIntegration) return null;
@@ -54,18 +70,22 @@ const NewConnectionPage: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-sm uppercase text-gray-500">Bio</span>
-            <span className="">{data.bio}</span>
+            <span className="line-clamp-1">{data.bio}</span>
           </div>
         </div>
         <StatsGrid />
       </div>
-      <h1 className="text-xl my-4 mt-6">Last posts</h1>
-      <h1 className="text-md">[TODO]</h1>
-      <div className="flex justify-end">
-        <button className="text-lg py-2 px-4 rounded-xl hover:shadow duration-150 mr-2">
+      <div className="flex justify-end mt-8">
+        <button
+          onClick={cancel}
+          className="text-lg py-2 px-4 rounded-xl hover:shadow duration-150 mr-2"
+        >
           Cancel
         </button>
-        <button className="text-lg text-white bg-black py-2 px-4 rounded-xl hover:shadow-xl duration-150">
+        <button
+          onClick={addConnection}
+          className="text-lg text-white bg-black py-2 px-4 rounded-xl hover:shadow-xl duration-150"
+        >
           Add connection
         </button>
       </div>

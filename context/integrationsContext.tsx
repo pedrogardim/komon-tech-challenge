@@ -2,14 +2,14 @@
 import React, { createContext, useMemo, useState, useContext } from 'react';
 import { SocialProfile } from '@/data/mockProfileData';
 
-export type Integration = SocialProfile & {
+export type Integration = {
   type: string;
   label: string;
+  username: string;
 };
-
-interface IntegrationsCtxState {
+export interface IntegrationsCtxState {
   integrations: Integration[];
-  newIntegration: Integration | null;
+  newIntegration: (Integration & SocialProfile) | null;
 }
 
 interface IntegrationsCtxValue extends IntegrationsCtxState {
@@ -34,7 +34,9 @@ const IntegrationsContextProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   //behaves similar to useState setter, also acceps a function in order to get previous state
-  const update = (input: { [key: string]: any } | Function) =>
+  const update = (
+    input: { [key: string]: any } | ((prev: IntegrationsCtxState) => void)
+  ) =>
     setData((prev) => ({
       ...prev,
       ...(typeof input === 'function' ? input(prev) : { ...input }),
