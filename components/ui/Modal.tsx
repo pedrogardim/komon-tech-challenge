@@ -4,10 +4,18 @@ import { createPortal } from 'react-dom';
 interface ModalProps {
   open: boolean;
   onClose?: () => void;
+  onConfirm?: () => void;
   children: React.ReactNode;
+  type?: 'delete' | 'confirm';
 }
 
-const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  onConfirm,
+  children,
+  type,
+}) => {
   return createPortal(
     <div
       tabIndex={-1}
@@ -37,9 +45,27 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
             />
           </button>
         </div>
-        <div className="p-6 flex flex-col items-center justify-center">
+        <div className="p-8 flex flex-col items-center justify-center">
           {children}
         </div>
+        {type && (
+          <div className="flex flex-row justify-end w-full">
+            <button
+              className="text-lg py-2 px-4 rounded-xl hover:shadow duration-15 mr-2"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button
+              className={`text-lg text-white py-2 px-4 rounded-xl hover:shadow-xl duration-15 ${
+                type === 'delete' ? 'bg-red-600' : 'bg-black'
+              }`}
+              onClick={onConfirm}
+            >
+              {type === 'delete' ? 'Delete' : 'Ok'}
+            </button>
+          </div>
+        )}
       </div>
     </div>,
     document.body
