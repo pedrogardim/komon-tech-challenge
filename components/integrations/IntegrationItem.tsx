@@ -3,11 +3,13 @@ import { Integration } from '@/context/integrationsContext';
 
 interface IntegrationItemProps {
   data: Integration;
+  onEdit: () => void;
   onDelete: () => void;
 }
 
 const IntegrationItem: React.FC<IntegrationItemProps> = ({
   data,
+  onEdit,
   onDelete,
 }) => {
   return (
@@ -29,6 +31,17 @@ const IntegrationItem: React.FC<IntegrationItemProps> = ({
       </div>
       <button
         className="ml-auto rounded-full hover:bg-gray-200 p-2"
+        onClick={onEdit}
+      >
+        <Image
+          src={`/icons/pencil.svg`}
+          alt="Close button"
+          width={24}
+          height={24}
+        />
+      </button>
+      <button
+        className="rounded-full hover:bg-gray-200 p-2"
         onClick={onDelete}
       >
         <Image

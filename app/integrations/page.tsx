@@ -6,11 +6,13 @@ import {
   useIntegrationsContext,
   IntegrationsCtxState,
 } from '@/context/integrationsContext';
-import IntegrationItem from '@/components/integrations/IntegrationItem';
 import Modal from '@/components/ui/Modal';
+import IntegrationItem from '@/components/integrations/IntegrationItem';
+import EditIntegrationModal from '@/components/integrations/EditIntegrationModal';
 
 const IntegrationsPage: React.FC = () => {
-  const [deletingItem, setDeletingItem] = useState<null | String>(null);
+  const [deletingItem, setDeletingItem] = useState<null | string>(null);
+  const [editingItem, setEditingItem] = useState<null | string>(null);
   const { integrations, update } = useIntegrationsContext();
 
   const deleteItem = () => {
@@ -48,6 +50,7 @@ const IntegrationsPage: React.FC = () => {
         <IntegrationItem
           data={integration}
           onDelete={() => setDeletingItem(integration.id)}
+          onEdit={() => setEditingItem(integration.id)}
           key={integration.id}
         />
       ))}
@@ -59,6 +62,11 @@ const IntegrationsPage: React.FC = () => {
       >
         Are you sure you want to delete this connection?
       </Modal>
+      <EditIntegrationModal
+        open={!!editingItem}
+        onClose={() => setEditingItem(null)}
+        itemId={editingItem}
+      />
     </>
   );
 };
