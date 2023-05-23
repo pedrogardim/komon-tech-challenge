@@ -5,6 +5,7 @@ export default function Header() {
     <header className="w-screen border-b border-neutral-400">
       <nav className="container mx-auto py-5 flex flex-row items-center">
         <Image
+          className="h-9"
           src="/komon.svg"
           alt="Komon Logo"
           width={159}

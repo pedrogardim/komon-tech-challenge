@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import useServiceLogin from '@/hooks/useServiceLogin';
+import Modal from '@/components/ui/Modal';
 
 const connectionOptions = [
   { label: 'Instagram', id: 'instagram', color: '#E1306C' },
@@ -22,7 +23,6 @@ const NewIntegrationPage: React.FC = () => {
   return (
     <>
       <p className="m-8">Choose the service below to integrate:</p>
-      {isLoading && <p className="m-8">LOADING</p>}
       <div className="grid gap-4 grid-cols-3 grid-rows-2">
         {connectionOptions.map((option) => (
           <button
@@ -41,6 +41,19 @@ const NewIntegrationPage: React.FC = () => {
           </button>
         ))}
       </div>
+      <Modal open={isLoading}>
+        <p className="m-4 text-lg text-center">
+          Please, follow the steps in the opened window to authenticate in the
+          selected provider
+        </p>
+        <Image
+          className="animate-spin h-10 w-10"
+          src="/icons/loading.svg"
+          alt="close"
+          width={36}
+          height={36}
+        />
+      </Modal>
     </>
   );
 };
