@@ -74,7 +74,7 @@ const PostCard: React.FC<PostCardProps> = ({
           </button>
           <button onClick={() => onSelect(data.id)}>
             <Icon
-              icon={selected ? 'marked' : 'blank'}
+              icon={`checkbox-${selected ? 'marked' : 'blank'}`}
               size={28}
               color="white"
             />
