@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/ui';
 
 const menuItems = [
   { label: 'Home', href: '/', icon: 'home' },
@@ -10,15 +10,18 @@ const menuItems = [
   { label: 'Integrations', href: '/integrations', icon: 'link' },
 ];
 
-export default function Sidemenu() {
+const Sidemenu: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="relative z-40 w-64 transition-transform -translate-x-full sm:translate-x-0 h-max">
-      <div className="h-full px-3 py-4 overflow-y-auto">
+    <aside className="relative z-40 min-w-[40px] lg:min-w-[12rem] h-max">
+      <div className="h-full py-4 px-0 lg:px-3 overflow-y-auto">
         <ul className="space-y-2 font-medium">
           {menuItems.map((item) => {
-            const isRouteActive = pathname === item.href;
+            const isRouteActive =
+              item.href === '/'
+                ? pathname === item.href
+                : pathname.startsWith(item.href);
             return (
               <li key={item.label}>
                 <Link
@@ -27,14 +30,12 @@ export default function Sidemenu() {
                     isRouteActive ? 'text-white bg-gray-900' : ''
                   }`}
                 >
-                  <Image
-                    src={`/icons/${item.icon}.svg`}
-                    alt="Komon Logo"
-                    className={isRouteActive ? 'invert' : ''}
-                    width={24}
-                    height={24}
+                  <Icon
+                    icon={item.icon}
+                    color={isRouteActive ? 'white' : 'black'}
+                    size={24}
                   />
-                  <span className="ml-3 font-euclid-triangle">
+                  <span className="ml-3 font-euclid-triangle hidden lg:block">
                     {item.label}
                   </span>
                 </Link>
@@ -45,4 +46,6 @@ export default function Sidemenu() {
       </div>
     </aside>
   );
-}
+};
+
+export default Sidemenu;

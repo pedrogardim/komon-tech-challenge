@@ -2,19 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import {
-  useIntegrationsContext,
-  IntegrationsCtxState,
-  Integration,
-} from '@/context/integrationsContext';
-
+import { useIntegrationsContext } from '@/context/integrationsContext';
 import { addIntegration } from '@/services/integrations';
+import { NewIntegration, IntegrationsCtxState } from '@/types/integrations';
 
-import { SocialProfile } from '@/data/mockProfileData';
-
-import Input from '@/components/ui/Input';
-import ProfileCard from '@/components/integrations/ProfileCard';
-import { useSnackbar } from '@/components/ui/Snackbar';
+import { ProfileCard } from '@/components/integrations';
+import { useSnackbar, Input } from '@/components/ui';
 
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();
@@ -23,7 +16,7 @@ const NewConnectionPage: React.FC = () => {
   const [label, setLabel] = useState<string>('');
   const [error, setError] = useState<null | string>(null);
 
-  const data = newIntegration as Integration & SocialProfile;
+  const data = newIntegration as NewIntegration;
 
   const onAddConnection = async () => {
     if (!label.trim()) {
@@ -72,7 +65,7 @@ const NewConnectionPage: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl my-4">Profile Info</h1>
+      <h1 className="text-xl mb-4 mt-8">Profile Info</h1>
       <ProfileCard data={data} />
       <div className="w-1/2 mt-4">
         <h1 className="text-xl my-4">Connection Name</h1>
@@ -96,7 +89,7 @@ const NewConnectionPage: React.FC = () => {
           <label className="my-2 ml-2 text-sm">Only for members</label>
         </div>
       </div>
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end">
         <button
           onClick={onCancel}
           className="text-lg py-2 px-4 rounded-xl hover:shadow duration-150 mr-2"

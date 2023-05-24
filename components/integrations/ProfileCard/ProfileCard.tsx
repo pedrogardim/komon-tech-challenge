@@ -1,33 +1,32 @@
 'use client';
 
 import Image from 'next/image';
-import { SocialProfile } from '@/data/mockProfileData';
-import StatsGrid from './StatsGrid';
-import { Integration } from '@/context/integrationsContext';
+import { NewIntegration } from '@/types/integrations';
+import StatsGrid from '../StatsGrid/StatsGrid';
+import { Icon } from '@/components/ui';
 
 interface ProfileCardProps {
-  data: Integration & SocialProfile;
+  data: NewIntegration;
   compact?: boolean;
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ data, compact }) => {
   return (
     <div
-      className={`grid grid-cols-4 gap-4 mt-4 
-      p-${compact ? 4 : 8} border shadow`}
+      className={`grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4 p-${
+        compact ? 4 : 8
+      } border shadow`}
     >
-      <Image
+      <Icon
         className="absolute"
-        src={`/icons/${data.type}.svg`}
-        alt={data.type}
-        width={48}
-        height={48}
+        icon={data.type}
+        size={48}
       />
       <div className="flex justify-center items-center">
         <Image
-          className={`h-48 w-48 object-cover rounded-full`}
+          className={`h-24 w-24 object-cover rounded-full  md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48`}
           src={data.profile_pic}
-          alt="close"
+          alt="Profile picture"
           width={256}
           height={256}
         />

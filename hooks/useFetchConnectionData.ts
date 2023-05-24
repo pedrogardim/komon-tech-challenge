@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { mockPostsData } from '@/data/mockPostsData';
-import { SocialProfile } from '@/data/mockProfileData';
+import { Integration, SocialMedia, SocialProfile } from '@/types/integrations';
 import { useIntegrationsContext } from '@/context/integrationsContext';
-import { useSnackbar } from '@/components/ui/Snackbar';
+import { useSnackbar } from '@/components/ui';
 
 import { fetchPosts, fetchProfileData } from '@/services/mockFetch';
 import {
@@ -22,7 +22,7 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
   const { integrations } = useIntegrationsContext();
 
   const connectionInfo = integrations.find((e) => e.id === connectionId);
-  const { type } = connectionInfo || {};
+  const type = (connectionInfo as Integration)?.type;
 
   const onCreatePool = async (selection: number[]) => {
     try {
@@ -31,7 +31,6 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     } catch (e) {
       let error = e as Error;
       setError(error.message);
-      openSnackbar(error.message);
     }
   };
 
@@ -42,7 +41,6 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     } catch (e) {
       let error = e as Error;
       setError(error.message);
-      openSnackbar(error.message);
     }
   };
 
@@ -53,7 +51,6 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     } catch (e) {
       let error = e as Error;
       setError(error.message);
-      openSnackbar(error.message);
     }
   };
 
@@ -66,11 +63,14 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     } catch (e) {
       let error = e as Error;
       setError(error.message);
-      openSnackbar(error.message);
     } finally {
       setIsLoading(false);
     }
-  }, [type, openSnackbar]);
+  }, [type]);
+
+  useEffect(() => {
+    if (error) openSnackbar(error as string);
+  }, [error, openSnackbar]);
 
   useEffect(() => {
     setArePostsLoading(true);

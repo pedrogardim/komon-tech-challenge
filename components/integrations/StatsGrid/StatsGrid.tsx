@@ -1,6 +1,6 @@
 'use client';
 import { formatNumber } from '@/utils/format';
-import { SocialProfile } from '@/data/mockProfileData';
+import { SocialProfile } from '@/types/integrations';
 
 interface StatsGridProps {
   data: SocialProfile;
@@ -22,7 +22,7 @@ const StatsGrid: React.FC<StatsGridProps> = ({ data }) => {
   );
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 col-span-2">
+    <div className="hidden grid-cols-2 grid-rows-2 col-span-2 lg:grid">
       {stats.map((stat, index) => {
         const style = `
             ${index === 1 || index === 3 ? 'border-l' : ''} 

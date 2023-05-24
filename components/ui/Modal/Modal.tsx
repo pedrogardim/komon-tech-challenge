@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
+import Icon from '../Icon/Icon';
 
 interface ModalProps {
   open: boolean;
@@ -21,6 +22,8 @@ const Modal: React.FC<ModalProps> = ({
     (onClose as Function)();
   };
 
+  if (typeof window === 'undefined') return null;
+
   return createPortal(
     <div
       tabIndex={-1}
@@ -41,12 +44,9 @@ const Modal: React.FC<ModalProps> = ({
             type="button"
             onClick={onClose}
           >
-            <Image
-              className="h-6 w-6"
-              src="/icons/close.svg"
-              alt="close"
-              width={36}
-              height={36}
+            <Icon
+              icon="close"
+              size={24}
             />
           </button>
         </div>

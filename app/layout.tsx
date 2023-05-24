@@ -1,7 +1,6 @@
-import Header from '@/components/layout/Header';
-import Sidemenu from '@/components/layout/Sidemenu';
 import { IntegrationsContextProvider } from '@/context/integrationsContext';
-import { SnackbarProvider } from '@/components/ui/Snackbar';
+import { Header, Sidemenu } from '@/components/layout';
+import { SnackbarProvider } from '@/components/ui';
 
 import './globals.css';
 import localFont from 'next/font/local';
@@ -40,7 +39,7 @@ export default function RootLayout({
           <main className="relative container mx-auto flex-auto grow flex flex-row items-start justify-start font-euclid-triangle overflow-x-hidden">
             <SnackbarProvider>
               <Sidemenu />
-              <div className="flex-auto relative flex px-8 py-5 h-full justify-start overflow-y-auto ">
+              <div className="flex-auto relative flex px-8 py-5 h-full justify-start overflow-y-auto no-scrollbar">
                 {children}
               </div>
             </SnackbarProvider>

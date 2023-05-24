@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import { Integration } from '@/context/integrationsContext';
-
 interface InputProps {
   value?: string;
   onChange: (value: string) => void;

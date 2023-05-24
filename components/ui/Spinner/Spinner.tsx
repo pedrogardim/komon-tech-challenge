@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Icon from '../Icon/Icon';
 
 interface SpinnerProps {
   size?: number;
@@ -6,12 +6,10 @@ interface SpinnerProps {
 
 const Spinner: React.FC<SpinnerProps> = ({ size = 64 }) => {
   return (
-    <Image
+    <Icon
       className={`animate-spin m-auto h-[${size}px] w-[${size}px]`}
-      src="/icons/loading.svg"
-      alt="close"
-      width={size}
-      height={size}
+      icon="loading"
+      size={size}
     />
   );
 };

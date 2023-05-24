@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { formatNumber } from '@/utils/format';
-import { Post } from '@/data/mockPostsData';
-import Modal from '../ui/Modal';
+import { Post } from '@/types/integrations';
+import Modal from '../../ui/Modal/Modal';
+import { Icon } from '@/components/ui';
 
 interface PostCardProps {
   data: Post;
@@ -37,22 +38,18 @@ const PostCard: React.FC<PostCardProps> = ({
       <div className="text-white inset-x-0 bottom-0 h-4/6 w-full absolute bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)] p-4 flex flex-col justify-end">
         <div className="flex">
           <div className="flex mr-4">
-            <Image
-              className="invert mr-2"
-              src="/icons/heart.svg"
-              alt="Like Icon"
-              height={20}
-              width={20}
+            <Icon
+              className="mr-2"
+              icon="heart"
+              color="white"
             />
             <span>{formatNumber(data.likes, 1)}</span>
           </div>
           <div className="flex">
-            <Image
-              className="invert mr-2"
-              src="/icons/comment.svg"
-              alt="Like Icon"
-              height={20}
-              width={20}
+            <Icon
+              className="mr-2"
+              icon="comment"
+              color="white"
             />
             <span>{formatNumber(data.comments, 1)}</span>
           </div>
@@ -60,30 +57,26 @@ const PostCard: React.FC<PostCardProps> = ({
         <p className="line-clamp-2">{data.caption}</p>
         <div className="flex justify-around	p-4">
           <button onClick={() => setConfirmationModal(true)}>
-            <Image
-              className="invert mr-2"
-              src="/icons/face-man-profile.svg"
-              alt="Set as profile"
-              height={28}
-              width={28}
+            <Icon
+              className="mr-2"
+              icon="face-man-profile"
+              size={28}
+              color="white"
             />
           </button>
           <button onClick={() => onRepost(data.id)}>
-            <Image
-              className="invert mr-2"
-              src="/icons/repeat.svg"
-              alt="Repost"
-              height={28}
-              width={28}
+            <Icon
+              className="mr-2"
+              icon="repeat"
+              size={28}
+              color="white"
             />
           </button>
           <button onClick={() => onSelect(data.id)}>
-            <Image
-              className="invert mr-2"
-              src={`/icons/checkbox-${selected ? 'marked' : 'blank'}.svg`}
-              alt="Select"
-              height={28}
-              width={28}
+            <Icon
+              icon={`checkbox-${selected ? 'marked' : 'blank'}`}
+              size={28}
+              color="white"
             />
           </button>
         </div>

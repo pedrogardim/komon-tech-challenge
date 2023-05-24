@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Header() {
+const Header: React.FC = () => {
   return (
     <header className="w-screen border-b border-neutral-400">
       <nav className="container mx-auto py-5 flex flex-row items-center">
@@ -14,13 +14,15 @@ export default function Header() {
         />
         <span className="font-euclid-triangle uppercase ml-4">Dashboard</span>
         <Image
+          className="ml-auto h-10 w-10 cursor-pointer rounded-full object-cover mr-4"
           src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="Avatar"
           width={64}
           height={64}
-          className="ml-auto h-10 w-10 cursor-pointer rounded-full object-cover"
         />
       </nav>
     </header>
   );
-}
+};
+
+export default Header;
