@@ -65,7 +65,7 @@ const NewConnectionPage: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl my-4">Profile Info</h1>
+      <h1 className="text-xl mb-4 mt-8">Profile Info</h1>
       <ProfileCard data={data} />
       <div className="w-1/2 mt-4">
         <h1 className="text-xl my-4">Connection Name</h1>
@@ -89,7 +89,7 @@ const NewConnectionPage: React.FC = () => {
           <label className="my-2 ml-2 text-sm">Only for members</label>
         </div>
       </div>
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end">
         <button
           onClick={onCancel}
           className="text-lg py-2 px-4 rounded-xl hover:shadow duration-150 mr-2"

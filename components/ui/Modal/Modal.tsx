@@ -21,6 +21,8 @@ const Modal: React.FC<ModalProps> = ({
     (onClose as Function)();
   };
 
+  if (typeof window === 'undefined') return null;
+
   return createPortal(
     <div
       tabIndex={-1}

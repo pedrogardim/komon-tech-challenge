@@ -24,7 +24,7 @@ const IntegrationItem: React.FC<IntegrationItemProps> = ({
   return (
     <div
       key={data.label}
-      className="relative border-b h-24 w-full flex items-center px-4 z-20 hover:shadow-lg hover:bg-gray-100 cursor-pointer"
+      className="relative border-b h-20 w-full flex items-center px-4 z-20 hover:shadow-lg hover:bg-gray-100 cursor-pointer"
       onClick={handleItemClick}
       id="item-container"
     >

@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import useFetchConnectionData from '@/hooks/useFetchConnectionData';
 import { Spinner, Input, Modal } from '@/components/ui';
 import { ProfileCard, PostCard } from '@/components/integrations';
@@ -36,7 +38,17 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
 
   return (
     <div className="p-0">
-      <h1 className="text-3xl font-bold">{connectionInfo?.label}</h1>
+      <div className="flex items-center">
+        <Link href="/integrations">
+          <Image
+            src="/icons/arrow-left.svg"
+            alt="close"
+            width={36}
+            height={36}
+          />
+        </Link>
+        <span className="text-3xl font-bold ml-4">{connectionInfo?.label}</span>
+      </div>
       <ProfileCard
         data={{ ...profileData, ...connectionInfo }}
         compact
@@ -62,7 +74,7 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
         ) : posts?.length === 0 ? (
           <p className="mx-auto text-center">No posts found</p>
         ) : (
-          <div className="grid gap-2 mt-4 w-full px-5 grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="grid gap-2 mt-4 w-full grid-cols-1  xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
             {posts?.map((post) => (
               <PostCard
                 data={post}

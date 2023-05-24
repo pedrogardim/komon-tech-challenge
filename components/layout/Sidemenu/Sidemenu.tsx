@@ -14,11 +14,14 @@ const Sidemenu: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="relative z-40 min-w-[40px] lg:min-w-[10rem] h-max">
+    <aside className="relative z-40 min-w-[40px] lg:min-w-[12rem] h-max">
       <div className="h-full py-4 px-0 lg:px-3 overflow-y-auto">
         <ul className="space-y-2 font-medium">
           {menuItems.map((item) => {
-            const isRouteActive = pathname === item.href;
+            const isRouteActive =
+              item.href === '/'
+                ? pathname === item.href
+                : pathname.startsWith(item.href);
             return (
               <li key={item.label}>
                 <Link
