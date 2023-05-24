@@ -29,6 +29,7 @@ const Sidemenu: React.FC = () => {
                   className={`flex items-center p-2 text-gray-900 rounded-lg duration-100 hover:shadow-md ${
                     isRouteActive ? 'text-white bg-gray-900' : ''
                   }`}
+                  id={`${item.href.replace('/', '')}-menu`}
                 >
                   <Icon
                     icon={item.icon}

@@ -71,7 +71,10 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
         ) : posts?.length === 0 ? (
           <p className="mx-auto text-center">No posts found</p>
         ) : (
-          <div className="grid gap-2 mt-4 w-full grid-cols-1  xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4">
+          <div
+            className="grid gap-2 mt-4 w-full grid-cols-1  xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4"
+            id="post-grid"
+          >
             {posts?.map((post) => (
               <PostCard
                 data={post}

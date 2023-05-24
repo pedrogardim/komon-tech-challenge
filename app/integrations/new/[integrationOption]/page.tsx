@@ -73,6 +73,7 @@ const NewConnectionPage: React.FC = () => {
           placeholder="Main Instagram, My Secondary YouTube Channel..."
           onChange={(v) => setLabel(v)}
           error={error}
+          id="label-input"
         />
         <div className="flex items-center mt-4">
           <input
@@ -99,6 +100,7 @@ const NewConnectionPage: React.FC = () => {
         <button
           onClick={onAddConnection}
           className="text-lg text-white bg-black py-2 px-4 rounded-xl hover:shadow-xl duration-150"
+          id="add-connection-btn"
         >
           Add connection
         </button>

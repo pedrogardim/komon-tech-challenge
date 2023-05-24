@@ -4,6 +4,7 @@ interface InputProps {
   label?: string;
   error?: string | null;
   placeholder?: string;
+  id?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -12,6 +13,7 @@ const Input: React.FC<InputProps> = ({
   label,
   error,
   placeholder,
+  id,
 }) => {
   return (
     <div>
@@ -26,6 +28,7 @@ const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
           value={value}
+          id={id}
         />
         <span className="absolute text-xs text-red-500 -bottom-6 left-2">
           {error}

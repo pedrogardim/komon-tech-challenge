@@ -64,7 +64,10 @@ const PostCard: React.FC<PostCardProps> = ({
               color="white"
             />
           </button>
-          <button onClick={() => onRepost(data.id)}>
+          <button
+            onClick={() => onRepost(data.id)}
+            className="repost-btn"
+          >
             <Icon
               className="mr-2"
               icon="repeat"
