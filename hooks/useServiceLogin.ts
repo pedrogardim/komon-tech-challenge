@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { auth } from '@/services/mockAuth';
+import {
+  signInWithInstagram,
+  signInWithYouTube,
+  signInWithFacebook,
+  signInWithTikTok,
+  signInWithTwitter,
+  signInWithLinkedIn,
+} from '@/services/auth';
+
 import { SocialProfile } from '@/types/integrations';
 
 const useServiceLogin = () => {
@@ -14,17 +22,17 @@ const useServiceLogin = () => {
     try {
       switch (serviceName) {
         case 'instagram':
-          return await auth.signInWithInstagram();
+          return await signInWithInstagram();
         case 'youtube':
-          return await auth.signInWithYouTube();
+          return await signInWithYouTube();
         case 'facebook':
-          return await auth.signInWithFacebook();
+          return await signInWithFacebook();
         case 'tiktok':
-          return await auth.signInWithTikTok();
+          return await signInWithTikTok();
         case 'twitter':
-          return await auth.signInWithTwitter();
+          return await signInWithTwitter();
         case 'linkedin':
-          return await auth.signInWithLinkedIn();
+          return await signInWithLinkedIn();
         default:
           throw new Error(`Unsupported service: ${serviceName}`);
       }
