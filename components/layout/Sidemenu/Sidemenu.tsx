@@ -21,7 +21,7 @@ const Sidemenu: React.FC = () => {
             const isRouteActive =
               item.href === '/'
                 ? pathname === item.href
-                : pathname.startsWith(item.href);
+                : pathname?.startsWith(item.href);
             return (
               <li key={item.label}>
                 <Link
