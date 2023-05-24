@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useIntegrationsContext } from '@/context/integrationsContext';
 import { IntegrationsCtxState } from '@/types/integrations';
-import Modal from '../ui/Modal';
-import Input from '../ui/Input';
 import { editIntegration } from '@/services/integrations';
-import { useSnackbar } from '../ui/Snackbar';
+import { Modal, Input, useSnackbar } from '../../ui';
 
 interface EditIntegrationModalProps {
   open: boolean;

@@ -1,7 +1,6 @@
-import Header from '@/components/layout/Header';
-import Sidemenu from '@/components/layout/Sidemenu';
 import { IntegrationsContextProvider } from '@/context/integrationsContext';
-import { SnackbarProvider } from '@/components/ui/Snackbar';
+import { Header, Sidemenu } from '@/components/layout';
+import { SnackbarProvider } from '@/components/ui';
 
 import './globals.css';
 import localFont from 'next/font/local';

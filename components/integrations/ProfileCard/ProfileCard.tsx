@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { NewIntegration } from '@/types/integrations';
-import StatsGrid from './StatsGrid';
+import StatsGrid from '../StatsGrid/StatsGrid';
 
 interface ProfileCardProps {
   data: NewIntegration;

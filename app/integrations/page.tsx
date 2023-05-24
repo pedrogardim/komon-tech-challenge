@@ -6,11 +6,11 @@ import { useIntegrationsContext } from '@/context/integrationsContext';
 import { deleteIntegration } from '@/services/integrations';
 import { IntegrationsCtxState } from '@/types/integrations';
 
-import Modal from '@/components/ui/Modal';
-import IntegrationItem from '@/components/integrations/IntegrationItem';
-import EditIntegrationModal from '@/components/integrations/EditIntegrationModal';
-import { useSnackbar } from '@/components/ui/Snackbar';
-import Spinner from '@/components/ui/Spinner';
+import { Modal, Spinner, useSnackbar } from '@/components/ui';
+import {
+  IntegrationItem,
+  EditIntegrationModal,
+} from '@/components/integrations';
 
 const IntegrationsPage: React.FC = () => {
   const [deletingItem, setDeletingItem] = useState<null | string>(null);

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useServiceLogin from '@/hooks/useServiceLogin';
 import { useIntegrationsContext } from '@/context/integrationsContext';
-import Modal from '@/components/ui/Modal';
+import { Modal } from '@/components/ui';
 
 const connectionOptions = [
   { label: 'Instagram', id: 'instagram', color: '#E1306C' },

@@ -10,7 +10,7 @@ const menuItems = [
   { label: 'Integrations', href: '/integrations', icon: 'link' },
 ];
 
-export default function Sidemenu() {
+const Sidemenu: React.FC = () => {
   const pathname = usePathname();
 
   return (
@@ -45,4 +45,6 @@ export default function Sidemenu() {
       </div>
     </aside>
   );
-}
+};
+
+export default Sidemenu;

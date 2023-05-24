@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { formatNumber } from '@/utils/format';
 import { Post } from '@/types/integrations';
-import Modal from '../ui/Modal';
+import Modal from '../../ui/Modal/Modal';
 
 interface PostCardProps {
   data: Post;

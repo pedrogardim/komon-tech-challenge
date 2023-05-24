@@ -3,14 +3,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useIntegrationsContext } from '@/context/integrationsContext';
-
 import { addIntegration } from '@/services/integrations';
-
 import { NewIntegration, IntegrationsCtxState } from '@/types/integrations';
 
-import Input from '@/components/ui/Input';
-import ProfileCard from '@/components/integrations/ProfileCard';
-import { useSnackbar } from '@/components/ui/Snackbar';
+import { ProfileCard } from '@/components/integrations';
+import { useSnackbar, Input } from '@/components/ui';
 
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();

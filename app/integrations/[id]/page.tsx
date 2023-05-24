@@ -1,11 +1,8 @@
 'use client';
 import { useState } from 'react';
 import useFetchConnectionData from '@/hooks/useFetchConnectionData';
-import Spinner from '@/components/ui/Spinner';
-import ProfileCard from '@/components/integrations/ProfileCard';
-import PostCard from '@/components/integrations/PostCard';
-import Input from '@/components/ui/Input';
-import Modal from '@/components/ui/Modal';
+import { Spinner, Input, Modal } from '@/components/ui';
+import { ProfileCard, PostCard } from '@/components/integrations';
 
 const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
   const [searchValue, setSearchValue] = useState('');

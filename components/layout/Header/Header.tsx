@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Header() {
+const Header: React.FC = () => {
   return (
     <header className="w-screen border-b border-neutral-400">
       <nav className="container mx-auto py-5 flex flex-row items-center">
@@ -23,4 +23,6 @@ export default function Header() {
       </nav>
     </header>
   );
-}
+};
+
+export default Header;

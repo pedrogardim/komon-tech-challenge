@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { mockPostsData } from '@/data/mockPostsData';
 import { Integration, SocialMedia, SocialProfile } from '@/types/integrations';
 import { useIntegrationsContext } from '@/context/integrationsContext';
-import { useSnackbar } from '@/components/ui/Snackbar';
+import { useSnackbar } from '@/components/ui';
 
 import { fetchPosts, fetchProfileData } from '@/services/mockFetch';
 import {
@@ -69,7 +69,7 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
   }, [type]);
 
   useEffect(() => {
-    openSnackbar(error as string);
+    if (error) openSnackbar(error as string);
   }, [error, openSnackbar]);
 
   useEffect(() => {
