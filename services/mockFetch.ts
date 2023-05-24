@@ -5,23 +5,23 @@ export const fetchProfileData = async (type: string) =>
   new Promise<SocialProfile>((resolve, reject) => {
     setTimeout(() => {
       resolve(mockProfileData[type]);
-    }, 1000);
+    }, 500);
   });
 
 export const fetchPosts = async ({
   startAfter = 0,
   items = 10,
-  searchQuery = '',
+  searchValue = '',
 }) =>
   new Promise<typeof mockPostsData>((resolve, reject) => {
     setTimeout(() => {
       let result = [...mockPostsData];
-      if (searchQuery.trim().length > 0) {
+      if (searchValue.trim().length > 0) {
         result = result.filter((post) =>
-          post.caption.toLowerCase().includes(searchQuery.toLowerCase())
+          post.caption.toLowerCase().includes(searchValue.trim().toLowerCase())
         );
       }
       result = result.slice(startAfter, startAfter + items);
       resolve(result);
-    }, 1000);
+    }, 500);
   });

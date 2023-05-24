@@ -7,7 +7,7 @@ import { Integration } from '@/context/integrationsContext';
 
 interface ProfileCardProps {
   data: Integration & SocialProfile;
-  compact: boolean;
+  compact?: boolean;
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ data, compact }) => {
