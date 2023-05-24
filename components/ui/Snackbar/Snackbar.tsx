@@ -22,6 +22,7 @@ const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
     setMessage(input);
     setOpen(true);
     setTimeout(() => {
+      setMessage('');
       setOpen(false);
     }, timeout);
   }, []);
