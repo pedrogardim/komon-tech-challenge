@@ -10,8 +10,15 @@ import Input from '@/components/ui/Input';
 const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
   const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
-  const { profileData, postCards, isLoading, connectionInfo, arePostsLoading } =
-    useFetchConnectionData(params.id, searchValue);
+  const {
+    profileData,
+    posts,
+    isLoading,
+    connectionInfo,
+    arePostsLoading,
+    onRepost,
+    onSetAsProfilePic,
+  } = useFetchConnectionData(params.id, searchValue);
 
   if (isLoading) return <Spinner size={64} />;
   if (!profileData) return null;
@@ -34,14 +41,16 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
       <div className="w-full">
         {arePostsLoading ? (
           <Spinner />
-        ) : postCards?.length === 0 ? (
+        ) : posts?.length === 0 ? (
           <p className="mx-auto text-center">No posts found</p>
         ) : (
           <div className="grid grid-cols-4 gap-2 mt-4 w-full">
-            {postCards?.map((post) => (
+            {posts?.map((post) => (
               <PostCard
                 data={post}
                 key={post.id}
+                onRepost={onRepost}
+                onSetAsProfilePic={onSetAsProfilePic}
               />
             ))}
           </div>

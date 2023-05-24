@@ -16,6 +16,11 @@ const Modal: React.FC<ModalProps> = ({
   children,
   type,
 }) => {
+  const handleModalConfirm = () => {
+    (onConfirm as Function)();
+    (onClose as Function)();
+  };
+
   return createPortal(
     <div
       tabIndex={-1}
@@ -60,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({
               className={`text-lg text-white py-2 px-4 rounded-xl hover:shadow-xl duration-15 ${
                 type === 'delete' ? 'bg-red-600' : 'bg-black'
               }`}
-              onClick={onConfirm}
+              onClick={handleModalConfirm}
             >
               {type === 'delete' ? 'Delete' : 'Ok'}
             </button>

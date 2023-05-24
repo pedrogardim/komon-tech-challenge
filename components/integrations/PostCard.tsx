@@ -1,13 +1,22 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import { formatNumber } from '@/utils/format';
 import { Post } from '@/data/mockPostsData';
+import Modal from '../ui/Modal';
 
 interface PostCardProps {
   data: Post;
+  onRepost: () => void;
+  onSetAsProfilePic: () => void;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ data }) => {
+const PostCard: React.FC<PostCardProps> = ({
+  data,
+  onRepost,
+  onSetAsProfilePic,
+}) => {
+  const [confirmationModal, setConfirmationModal] = useState(false);
   return (
     <div
       key={data.id}
@@ -45,17 +54,36 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
         </div>
         <p className="line-clamp-2">{data.caption}</p>
         <div className="flex justify-around	p-4">
-          <button>
+          <button onClick={() => setConfirmationModal(true)}>
+            <Image
+              className="invert mr-2"
+              src="/icons/face-man-profile.svg"
+              alt="Set as profile"
+              height={28}
+              width={28}
+            />
+          </button>
+          <button onClick={() => onRepost(data.id)}>
             <Image
               className="invert mr-2"
               src="/icons/repeat.svg"
-              alt="Like Icon"
+              alt="Repost"
               height={28}
               width={28}
             />
           </button>
         </div>
       </div>
+      {confirmationModal && (
+        <Modal
+          open={confirmationModal}
+          onClose={() => setConfirmationModal(false)}
+          onConfirm={() => onSetAsProfilePic(data.id)}
+          type="confirm"
+        >
+          Use post picture as profile picture?
+        </Modal>
+      )}
     </div>
   );
 };

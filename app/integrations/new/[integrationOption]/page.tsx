@@ -11,10 +11,12 @@ import {
 import { SocialProfile } from '@/data/mockProfileData';
 import Input from '@/components/ui/Input';
 import ProfileCard from '@/components/integrations/ProfileCard';
+import { useSnackbar } from '@/components/ui/Snackbar';
 
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();
   const { integrations, newIntegration, update } = useIntegrationsContext();
+  const { openSnackbar } = useSnackbar();
   const [label, setLabel] = useState<string>('');
   const [error, setError] = useState<null | string>(null);
 
@@ -40,6 +42,7 @@ const NewConnectionPage: React.FC = () => {
       integrations: [...prev.integrations, newIntegration],
       newIntegration: null,
     }));
+    openSnackbar(`Integration added: ${newIntegration.label}`);
     router.replace('/integrations');
   };
 
