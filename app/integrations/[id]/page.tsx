@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import useFetchConnectionData from '@/hooks/useFetchConnectionData';
-import { Spinner, Input, Modal } from '@/components/ui';
+import { Spinner, Input, Modal, Icon } from '@/components/ui';
 import { ProfileCard, PostCard } from '@/components/integrations';
 
 const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
@@ -40,11 +39,9 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
     <div className="p-0">
       <div className="flex items-center">
         <Link href="/integrations">
-          <Image
-            src="/icons/arrow-left.svg"
-            alt="close"
-            width={36}
-            height={36}
+          <Icon
+            icon="arrow-left"
+            size={36}
           />
         </Link>
         <span className="text-3xl font-bold ml-4">{connectionInfo?.label}</span>

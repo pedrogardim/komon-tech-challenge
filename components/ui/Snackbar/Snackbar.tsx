@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useState, useContext, useCallback } from 'react';
-import Image from 'next/image';
+import Icon from '../Icon/Icon';
 
 export interface SnackbarState {
   openSnackbar: (message: string) => void;
@@ -36,12 +36,10 @@ const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
         }`}
       >
         <button onClick={() => setOpen(false)}>
-          <Image
+          <Icon
             className="absolute top-4 right-4"
-            src="/icons/close.svg"
-            alt="close"
-            width={20}
-            height={20}
+            icon="close"
+            size={20}
           />
         </button>
 

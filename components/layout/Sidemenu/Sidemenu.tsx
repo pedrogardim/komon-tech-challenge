@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/ui';
 
 const menuItems = [
   { label: 'Home', href: '/', icon: 'home' },
@@ -30,12 +30,10 @@ const Sidemenu: React.FC = () => {
                     isRouteActive ? 'text-white bg-gray-900' : ''
                   }`}
                 >
-                  <Image
-                    src={`/icons/${item.icon}.svg`}
-                    alt="Komon Logo"
-                    className={isRouteActive ? 'invert' : ''}
-                    width={24}
-                    height={24}
+                  <Icon
+                    icon={item.icon}
+                    color={isRouteActive ? 'white' : 'black'}
+                    size={24}
                   />
                   <span className="ml-3 font-euclid-triangle hidden lg:block">
                     {item.label}

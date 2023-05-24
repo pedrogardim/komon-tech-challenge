@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { NewIntegration } from '@/types/integrations';
 import StatsGrid from '../StatsGrid/StatsGrid';
+import { Icon } from '@/components/ui';
 
 interface ProfileCardProps {
   data: NewIntegration;
@@ -16,18 +17,16 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ data, compact }) => {
         compact ? 4 : 8
       } border shadow`}
     >
-      <Image
+      <Icon
         className="absolute"
-        src={`/icons/${data.type}.svg`}
-        alt={data.type}
-        width={48}
-        height={48}
+        icon={data.type}
+        size={48}
       />
       <div className="flex justify-center items-center">
         <Image
           className={`h-24 w-24 object-cover rounded-full  md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48`}
           src={data.profile_pic}
-          alt="close"
+          alt="Profile picture"
           width={256}
           height={256}
         />

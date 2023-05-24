@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useIntegrationsContext } from '@/context/integrationsContext';
 import { IntegrationsCtxState } from '@/types/integrations';
 import { editIntegration } from '@/services/integrations';
-import { Modal, Input, useSnackbar } from '../../ui';
+import { Modal, Input, useSnackbar, Icon } from '../../ui';
 
 interface EditIntegrationModalProps {
   open: boolean;
@@ -66,12 +65,10 @@ const EditIntegrationModal: React.FC<EditIntegrationModalProps> = ({
     >
       <div className="w-96">
         <div className="flex items-center border p-2 mb-4">
-          <Image
+          <Icon
             className="mr-2"
-            src={`/icons/${data.type}.svg`}
-            alt={`${data.type} icon`}
-            width={32}
-            height={32}
+            icon={data.type}
+            size={32}
           />
           <span className="text-gray-500 ">
             <u>{data.username}</u>
