@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui';
 
-const menuItems = [
+export const menuItems = [
   { label: 'Home', href: '/', icon: 'home' },
   { label: 'Tasks', href: '/tasks', icon: 'check' },
   { label: 'Interactions', href: '/interactions', icon: 'chats' },
