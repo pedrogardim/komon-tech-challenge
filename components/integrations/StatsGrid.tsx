@@ -1,6 +1,6 @@
 'use client';
 import { formatNumber } from '@/utils/format';
-import { SocialProfile } from '@/data/mockProfileData';
+import { SocialProfile } from '@/types/integrations';
 
 interface StatsGridProps {
   data: SocialProfile;

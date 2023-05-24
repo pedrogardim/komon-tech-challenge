@@ -1,12 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { SocialProfile } from '@/data/mockProfileData';
+import { NewIntegration } from '@/types/integrations';
 import StatsGrid from './StatsGrid';
-import { Integration } from '@/context/integrationsContext';
 
 interface ProfileCardProps {
-  data: Integration & SocialProfile;
+  data: NewIntegration;
   compact?: boolean;
 }
 

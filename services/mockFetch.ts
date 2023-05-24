@@ -1,7 +1,8 @@
 import { mockPostsData } from '@/data/mockPostsData';
-import { SocialProfile, mockProfileData } from '@/data/mockProfileData';
+import { mockProfileData } from '@/data/mockProfileData';
+import { SocialProfile, SocialMedia } from '@/types/integrations';
 
-export const fetchProfileData = async (type: string) =>
+export const fetchProfileData = async (type: SocialMedia) =>
   new Promise<SocialProfile>((resolve, reject) => {
     setTimeout(() => {
       resolve(mockProfileData[type]);

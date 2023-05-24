@@ -1,3 +1,5 @@
+import { SocialMedia, SocialProfile } from '@/types/integrations';
+
 const commonData = {
   username: 'WanderlustAdventurer',
   name: 'Alex Thompson',
@@ -7,7 +9,7 @@ const commonData = {
     'https://images.pexels.com/photos/15591667/pexels-photo-15591667/free-photo-of-man-sitting-on-a-rock-on-a-mountain-peak-and-smiling.jpeg?auto=compress&cs=tinysrgb&w=1600',
 };
 
-export const mockProfileData = {
+export const mockProfileData: { [key in SocialMedia]: SocialProfile } = {
   instagram: {
     ...commonData,
     username: '@WanderlustAdventurer',
@@ -57,11 +59,3 @@ export const mockProfileData = {
       "Passionate traveler and storyteller with a keen eye for capturing unforgettable moments. Experienced in global exploration, cultural immersion, and sustainable travel practices. Let's connect and create meaningful connections in the travel community!",
   },
 };
-
-export type SocialProfile =
-  | typeof mockProfileData.instagram
-  | typeof mockProfileData.youtube
-  | typeof mockProfileData.facebook
-  | typeof mockProfileData.tiktok
-  | typeof mockProfileData.twitter
-  | typeof mockProfileData.linkedin;

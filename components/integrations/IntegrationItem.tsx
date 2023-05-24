@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Integration } from '@/context/integrationsContext';
+import { Integration } from '@/types/integrations';
 import { MouseEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -17,7 +17,7 @@ const IntegrationItem: React.FC<IntegrationItemProps> = ({
   const router = useRouter();
 
   const handleItemClick: MouseEventHandler<HTMLDivElement> = (event) => {
-    if (event.target.id !== 'item-container') return;
+    if ((event.target as HTMLDivElement).id !== 'item-container') return;
     router.push('/integrations/' + data.id);
   };
 

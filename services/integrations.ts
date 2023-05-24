@@ -1,4 +1,4 @@
-import { Integration } from '@/context/integrationsContext';
+import { Integration } from '@/types/integrations';
 import {
   getStoredIntegrations,
   writeLocalIntegrations,

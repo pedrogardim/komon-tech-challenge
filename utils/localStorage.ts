@@ -1,4 +1,4 @@
-import { Integration } from '@/context/integrationsContext';
+import { Integration } from '@/types/integrations';
 
 export const getStoredIntegrations = () => {
   let stored = localStorage.getItem('integrations');

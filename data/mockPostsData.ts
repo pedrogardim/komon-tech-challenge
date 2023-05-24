@@ -1,4 +1,6 @@
-export const mockPostsData = [
+import { Post } from '@/types/integrations';
+
+export const mockPostsData: Post[] = [
   {
     id: 1,
     caption:
@@ -175,5 +177,3 @@ export const mockPostsData = [
     comments: 41,
   },
 ];
-
-export type Post = (typeof mockPostsData)[0];

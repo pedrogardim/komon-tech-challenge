@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth } from '@/services/mockAuth';
-import { SocialProfile } from '@/data/mockProfileData';
+import { SocialProfile } from '@/types/integrations';
 
 const useServiceLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

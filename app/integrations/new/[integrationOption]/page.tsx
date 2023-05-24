@@ -2,15 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import {
-  useIntegrationsContext,
-  IntegrationsCtxState,
-  Integration,
-} from '@/context/integrationsContext';
+import { useIntegrationsContext } from '@/context/integrationsContext';
 
 import { addIntegration } from '@/services/integrations';
 
-import { SocialProfile } from '@/data/mockProfileData';
+import { NewIntegration, IntegrationsCtxState } from '@/types/integrations';
 
 import Input from '@/components/ui/Input';
 import ProfileCard from '@/components/integrations/ProfileCard';
@@ -23,7 +19,7 @@ const NewConnectionPage: React.FC = () => {
   const [label, setLabel] = useState<string>('');
   const [error, setError] = useState<null | string>(null);
 
-  const data = newIntegration as Integration & SocialProfile;
+  const data = newIntegration as NewIntegration;
 
   const onAddConnection = async () => {
     if (!label.trim()) {

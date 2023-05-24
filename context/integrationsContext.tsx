@@ -6,21 +6,10 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
-import { SocialProfile } from '@/data/mockProfileData';
+
+import { Integration, IntegrationsCtxState } from '@/types/integrations';
 
 import { loadIntegrations } from '@/services/integrations';
-
-export type Integration = {
-  id: string;
-  type: string;
-  label: string;
-  username: string;
-};
-export interface IntegrationsCtxState {
-  integrations: Integration[];
-  newIntegration: (Integration & SocialProfile) | null;
-  isLoading: boolean;
-}
 
 interface IntegrationsCtxValue extends IntegrationsCtxState {
   update: (input: { [key: string]: any } | Function) => void;
