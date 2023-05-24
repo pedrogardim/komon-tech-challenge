@@ -1,15 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import useFetchConnectionData from '@/hooks/useFetchConnectionData';
 import Spinner from '@/components/ui/Spinner';
 import ProfileCard from '@/components/integrations/ProfileCard';
 import PostCard from '@/components/integrations/PostCard';
 import Input from '@/components/ui/Input';
+import Modal from '@/components/ui/Modal';
 
 const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
   const [searchValue, setSearchValue] = useState('');
-  const router = useRouter();
+  const [createPoolModal, setCreateModalPool] = useState(false);
+  const [selection, setSelection] = useState<number[]>([]);
   const {
     profileData,
     posts,
@@ -18,13 +19,26 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
     arePostsLoading,
     onRepost,
     onSetAsProfilePic,
+    onCreatePool,
   } = useFetchConnectionData(params.id, searchValue);
 
+  const onCreatePoolConfirm = () => {
+    onCreatePool(selection);
+    setSelection([]);
+  };
+
+  const onSelect = (newId: number) => {
+    setSelection((prev) =>
+      prev.includes(newId)
+        ? prev.filter((id) => id !== newId)
+        : [...prev, newId]
+    );
+  };
   if (isLoading) return <Spinner size={64} />;
   if (!profileData) return null;
 
   return (
-    <div className="p-4">
+    <div className="p-0">
       <h1 className="text-3xl font-bold">{connectionInfo?.label}</h1>
       <ProfileCard
         data={{ ...profileData, ...connectionInfo }}
@@ -37,6 +51,13 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
           value={searchValue}
           placeholder="Search..."
         />
+        <button
+          className="text-lg mb-4 ml-auto rounded-xl bg-black text-white hover:shadow-xl duration-150 py-2 px-4 disabled:bg-gray-300 disabled:hover:shadow-none"
+          disabled={selection.length === 0}
+          onClick={() => setCreateModalPool(true)}
+        >
+          Create a pool
+        </button>
       </div>
       <div className="w-full">
         {arePostsLoading ? (
@@ -49,13 +70,23 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
               <PostCard
                 data={post}
                 key={post.id}
+                selected={selection.includes(post.id)}
                 onRepost={onRepost}
                 onSetAsProfilePic={onSetAsProfilePic}
+                onSelect={onSelect}
               />
             ))}
           </div>
         )}
       </div>
+      <Modal
+        open={createPoolModal}
+        onClose={() => setCreateModalPool(false)}
+        onConfirm={onCreatePoolConfirm}
+        type="confirm"
+      >
+        Create a pool with {selection.length} posts?
+      </Modal>
     </div>
   );
 };

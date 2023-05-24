@@ -7,14 +7,18 @@ import Modal from '../ui/Modal';
 
 interface PostCardProps {
   data: Post;
-  onRepost: () => void;
-  onSetAsProfilePic: () => void;
+  selected?: boolean;
+  onRepost: (id: number) => void;
+  onSetAsProfilePic: (id: number) => void;
+  onSelect: (id: number) => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
   data,
+  selected,
   onRepost,
   onSetAsProfilePic,
+  onSelect,
 }) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   return (
@@ -23,7 +27,8 @@ const PostCard: React.FC<PostCardProps> = ({
       className="relative shadow rounded-[20px] overflow-hidden aspect-square"
     >
       <Image
-        className="object-cover h-full w-full"
+        className={`object-cover h-full w-full 
+        ${selected && 'brightness-50'} duration-150`}
         src={data.image_url}
         alt="Post Image"
         width={256}
@@ -72,11 +77,20 @@ const PostCard: React.FC<PostCardProps> = ({
               width={28}
             />
           </button>
+          <button onClick={() => onSelect(data.id)}>
+            <Image
+              className="invert mr-2"
+              src={`/icons/checkbox-${selected ? 'marked' : 'blank'}.svg`}
+              alt="Select"
+              height={28}
+              width={28}
+            />
+          </button>
         </div>
       </div>
       {confirmationModal && (
         <Modal
-          open={confirmationModal}
+          open={true}
           onClose={() => setConfirmationModal(false)}
           onConfirm={() => onSetAsProfilePic(data.id)}
           type="confirm"

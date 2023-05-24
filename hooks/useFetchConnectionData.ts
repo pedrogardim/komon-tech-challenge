@@ -5,7 +5,11 @@ import { useIntegrationsContext } from '@/context/integrationsContext';
 import { useSnackbar } from '@/components/ui/Snackbar';
 
 import { fetchPosts, fetchProfileData } from '@/services/mockFetch';
-import { repostPost, setPostAsProfilePicture } from '@/services/integrations';
+import {
+  repostPost,
+  setPostAsProfilePicture,
+  createPool,
+} from '@/services/integrations';
 
 const useFetchConnectionData = (connectionId: string, searchValue: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,12 +19,23 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
   const [posts, setPosts] = useState<typeof mockPostsData>();
 
   const { openSnackbar } = useSnackbar();
-  const { integrations, update } = useIntegrationsContext();
+  const { integrations } = useIntegrationsContext();
 
   const connectionInfo = integrations.find((e) => e.id === connectionId);
   const { type } = connectionInfo || {};
 
-  const onRepost = async (id: string) => {
+  const onCreatePool = async (selection: number[]) => {
+    try {
+      const res = await createPool(selection);
+      openSnackbar(`Pool created with ${selection.length} posts`);
+    } catch (e) {
+      let error = e as Error;
+      setError(error.message);
+      openSnackbar(error.message);
+    }
+  };
+
+  const onRepost = async (id: number) => {
     try {
       const res = await repostPost(id);
       openSnackbar('Reposted on Komon');
@@ -31,7 +46,7 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     }
   };
 
-  const onSetAsProfilePic = async (id: string) => {
+  const onSetAsProfilePic = async (id: number) => {
     try {
       const res = await setPostAsProfilePicture(id);
       openSnackbar('Post picture set as profile pic!');
@@ -81,6 +96,7 @@ const useFetchConnectionData = (connectionId: string, searchValue: string) => {
     arePostsLoading,
     onRepost,
     onSetAsProfilePic,
+    onCreatePool,
   };
 };
 
