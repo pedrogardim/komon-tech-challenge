@@ -14,8 +14,8 @@ const Sidemenu: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="relative z-40 w-64 transition-transform -translate-x-full sm:translate-x-0 h-max">
-      <div className="h-full px-3 py-4 overflow-y-auto">
+    <aside className="relative z-40 min-w-[40px] lg:min-w-[10rem] h-max">
+      <div className="h-full py-4 px-0 lg:px-3 overflow-y-auto">
         <ul className="space-y-2 font-medium">
           {menuItems.map((item) => {
             const isRouteActive = pathname === item.href;
@@ -34,7 +34,7 @@ const Sidemenu: React.FC = () => {
                     width={24}
                     height={24}
                   />
-                  <span className="ml-3 font-euclid-triangle">
+                  <span className="ml-3 font-euclid-triangle hidden lg:block">
                     {item.label}
                   </span>
                 </Link>

@@ -30,7 +30,9 @@ const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
     <SnackbarContext.Provider value={{ openSnackbar }}>
       <div
         className={`absolute top-4 right-4 z-50 shadow-lg p-10 border duration-300 bg-white ${
-          open ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+          open
+            ? 'opacity-100 translate-x-0'
+            : 'opacity-0 translate-x-24 pointer-events-none'
         }`}
       >
         <button onClick={() => setOpen(false)}>
