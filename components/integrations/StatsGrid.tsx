@@ -1,20 +1,24 @@
 'use client';
 import { formatNumber } from '@/utils/format';
+import { SocialProfile } from '@/data/mockProfileData';
 
-import {
-  useIntegrationsContext,
-  Integration,
-} from '@/context/integrationsContext';
+interface StatsGridProps {
+  data: SocialProfile;
+}
 
-const StatsGrid: React.FC = () => {
-  const { newIntegration } = useIntegrationsContext();
-  const data = newIntegration as Integration;
-
+const StatsGrid: React.FC<StatsGridProps> = ({ data }) => {
   const stats = Object.keys(data).filter(
     (field, index) =>
-      !['username', 'bio', 'location', 'profile_pic', 'name', 'type'].includes(
-        field
-      ) && index > 4
+      ![
+        'username',
+        'bio',
+        'location',
+        'profile_pic',
+        'name',
+        'type',
+        'label',
+        'id',
+      ].includes(field) && index > 4
   );
 
   return (

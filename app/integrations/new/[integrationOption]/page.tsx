@@ -1,8 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import StatsGrid from '@/components/integrations/StatsGrid';
 
 import {
   useIntegrationsContext,
@@ -12,10 +10,13 @@ import {
 
 import { SocialProfile } from '@/data/mockProfileData';
 import Input from '@/components/ui/Input';
+import ProfileCard from '@/components/integrations/ProfileCard';
+import { useSnackbar } from '@/components/ui/Snackbar';
 
 const NewConnectionPage: React.FC = () => {
   const router = useRouter();
   const { integrations, newIntegration, update } = useIntegrationsContext();
+  const { openSnackbar } = useSnackbar();
   const [label, setLabel] = useState<string>('');
   const [error, setError] = useState<null | string>(null);
 
@@ -27,7 +28,7 @@ const NewConnectionPage: React.FC = () => {
       return;
     }
     const newIntegration = {
-      id: data.type + '-' + data.username,
+      id: data.type + '-' + data.username.replace('@', ''),
       username: data.username,
       type: data.type,
       label,
@@ -41,6 +42,7 @@ const NewConnectionPage: React.FC = () => {
       integrations: [...prev.integrations, newIntegration],
       newIntegration: null,
     }));
+    openSnackbar(`Integration added: ${newIntegration.label}`);
     router.replace('/integrations');
   };
 
@@ -62,34 +64,7 @@ const NewConnectionPage: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl my-4">Profile Info</h1>
-      <div className="grid grid-cols-4 gap-4 mt-4 p-8 border shadow">
-        <div className="flex justify-center items-center">
-          <Image
-            className="h-48 w-48 object-cover rounded-full"
-            src={data.profile_pic}
-            alt="close"
-            width={256}
-            height={256}
-          />
-        </div>
-        <div className="grid grid-rows-3">
-          <div className="flex flex-col">
-            <span className="text-sm uppercase text-gray-500">Name</span>
-            <span className="text-lg">{data.name}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm uppercase text-gray-500">Username</span>
-            <span className="text-lg  text-slate-600">
-              <u>{data.username}</u>
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm uppercase text-gray-500">Bio</span>
-            <span className="line-clamp-1">{data.bio}</span>
-          </div>
-        </div>
-        <StatsGrid />
-      </div>
+      <ProfileCard data={data} />
       <div className="w-1/2 mt-4">
         <h1 className="text-xl my-4">Connection Name</h1>
         <Input
