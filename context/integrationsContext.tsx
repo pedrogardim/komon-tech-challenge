@@ -1,6 +1,14 @@
 'use client';
-import React, { createContext, useMemo, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useMemo,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import { SocialProfile } from '@/data/mockProfileData';
+
+import { loadIntegrations } from '@/services/integrations';
 
 export type Integration = {
   id: string;
@@ -11,6 +19,7 @@ export type Integration = {
 export interface IntegrationsCtxState {
   integrations: Integration[];
   newIntegration: (Integration & SocialProfile) | null;
+  isLoading: boolean;
 }
 
 interface IntegrationsCtxValue extends IntegrationsCtxState {
@@ -20,6 +29,7 @@ interface IntegrationsCtxValue extends IntegrationsCtxState {
 const defaultCtxValue = {
   integrations: [],
   newIntegration: null,
+  isLoading: true,
   update: () => {},
 };
 
@@ -30,9 +40,17 @@ const IntegrationsContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [data, setData] = useState<IntegrationsCtxState>({
+    isLoading: true,
     integrations: [],
     newIntegration: null,
   });
+
+  //load user integrations on startup
+  useEffect(() => {
+    loadIntegrations().then((integrations: Integration[]) => {
+      update({ integrations, isLoading: false });
+    });
+  }, []);
 
   //behaves similar to useState setter, also acceps a function in order to get previous state
   const update = (
