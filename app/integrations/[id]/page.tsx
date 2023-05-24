@@ -1,15 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Spinner from '@/components/ui/Spinner';
 import useFetchConnectionData from '@/hooks/useFetchConnectionData';
+import Spinner from '@/components/ui/Spinner';
 import ProfileCard from '@/components/integrations/ProfileCard';
+import PostCard from '@/components/integrations/PostCard';
 
 const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
-  const { profileData, isLoading, connectionInfo } = useFetchConnectionData(
-    params.id
-  );
+  const { profileData, PostCards, isLoading, connectionInfo } =
+    useFetchConnectionData(params.id);
 
   if (isLoading) return <Spinner size={64} />;
   if (!profileData) return null;
@@ -21,6 +20,15 @@ const IntegrationPage: React.FC<{ params: { id: string } }> = ({ params }) => {
         data={{ ...profileData, ...connectionInfo }}
         compact
       />
+      <h2 className="text-xl mt-6">Last posts</h2>
+      <div className="grid grid-cols-4 gap-2 mt-4">
+        {PostCards?.map((post) => (
+          <PostCard
+            data={post}
+            key={post.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };

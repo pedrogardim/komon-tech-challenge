@@ -1,9 +1,9 @@
-export const formatNumber = (input: number) => {
+export const formatNumber = (input: number, cases = 2) => {
   if (input >= 1_000_000) {
-    return (input / 1_000_000).toFixed(2) + 'M';
+    return (input / 1_000_000).toFixed(cases) + 'M';
   }
-  if (input >= 10_000) {
-    return (input / 1_000).toFixed(2) + 'K';
+  if (input >= 1_000) {
+    return (input / 1_000).toFixed(cases) + 'K';
   }
   return input;
 };
