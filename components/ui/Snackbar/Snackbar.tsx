@@ -34,6 +34,7 @@ const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
             ? 'opacity-100 translate-x-0'
             : 'opacity-0 translate-x-24 pointer-events-none'
         }`}
+        id="snackbar"
       >
         <button onClick={() => setOpen(false)}>
           <Icon

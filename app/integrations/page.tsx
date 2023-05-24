@@ -37,7 +37,7 @@ const IntegrationsPage: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {(isLoading || !window) && <Spinner />}
       {integrations?.length === 0 && !isLoading && (
         <>
           <Image
@@ -57,14 +57,19 @@ const IntegrationsPage: React.FC = () => {
       >
         Add an integration
       </Link>
-      {integrations.map((integration) => (
-        <IntegrationItem
-          data={integration}
-          onDelete={() => setDeletingItem(integration.id)}
-          onEdit={() => setEditingItem(integration.id)}
-          key={integration.id}
-        />
-      ))}
+      <div
+        className="w-full"
+        id="integrations-list"
+      >
+        {integrations.map((integration) => (
+          <IntegrationItem
+            data={integration}
+            onDelete={() => setDeletingItem(integration.id)}
+            onEdit={() => setEditingItem(integration.id)}
+            key={integration.id}
+          />
+        ))}
+      </div>
       <Modal
         open={!!deletingItem}
         onClose={() => setDeletingItem(null)}

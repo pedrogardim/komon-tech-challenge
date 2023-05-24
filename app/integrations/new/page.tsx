@@ -34,6 +34,7 @@ const NewIntegrationPage: React.FC = () => {
             className={`text-lg text-white bg-black py-2 px-4 rounded-xl hover:shadow-xl duration-150 flex items-center hover:bg-[${option.color}]`}
             key={option.id}
             onClick={() => onServiceButtonClick(option.id)}
+            id={`${option.id}-btn`}
           >
             <Icon
               className="mr-2"
