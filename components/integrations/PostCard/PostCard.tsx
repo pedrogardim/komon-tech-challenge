@@ -26,6 +26,7 @@ const PostCard: React.FC<PostCardProps> = ({
     <div
       key={data.id}
       className="relative shadow rounded-[20px] overflow-hidden aspect-square"
+      data-cy={`post-card-${data.id}`}
     >
       <Image
         className={`object-cover h-full w-full 
@@ -34,6 +35,7 @@ const PostCard: React.FC<PostCardProps> = ({
         alt="Post Image"
         width={256}
         height={256}
+        data-cy={`post-card-image-${data.id}`}
       />
       <div className="text-white inset-x-0 bottom-0 h-4/6 w-full absolute bg-gradient-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)] p-4 flex flex-col justify-end">
         <div className="flex">
@@ -43,7 +45,9 @@ const PostCard: React.FC<PostCardProps> = ({
               icon="heart"
               color="white"
             />
-            <span>{formatNumber(data.likes, 1)}</span>
+            <span data-cy={`post-card-likes-${data.id}`}>
+              {formatNumber(data.likes, 1)}
+            </span>
           </div>
           <div className="flex">
             <Icon
@@ -51,12 +55,17 @@ const PostCard: React.FC<PostCardProps> = ({
               icon="comment"
               color="white"
             />
-            <span>{formatNumber(data.comments, 1)}</span>
+            <span data-cy={`post-card-comments-${data.id}`}>
+              {formatNumber(data.comments, 1)}
+            </span>
           </div>
         </div>
         <p className="line-clamp-2">{data.caption}</p>
         <div className="flex justify-around	p-4">
-          <button onClick={() => setConfirmationModal(true)}>
+          <button
+            onClick={() => setConfirmationModal(true)}
+            data-cy={`post-card-profile-btn-${data.id}`}
+          >
             <Icon
               className="mr-2"
               icon="face-man-profile"
@@ -67,6 +76,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <button
             onClick={() => onRepost(data.id)}
             className="repost-btn"
+            data-cy={`post-card-repost-btn-${data.id}`}
           >
             <Icon
               className="mr-2"
@@ -75,7 +85,10 @@ const PostCard: React.FC<PostCardProps> = ({
               color="white"
             />
           </button>
-          <button onClick={() => onSelect(data.id)}>
+          <button
+            onClick={() => onSelect(data.id)}
+            data-cy={`post-card-select-btn-${data.id}`}
+          >
             <Icon
               icon={`checkbox-${selected ? 'marked' : 'blank'}`}
               size={28}

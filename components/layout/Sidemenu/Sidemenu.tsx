@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/ui';
 
-const menuItems = [
+export const menuItems = [
   { label: 'Home', href: '/', icon: 'home' },
   { label: 'Tasks', href: '/tasks', icon: 'check' },
   { label: 'Interactions', href: '/interactions', icon: 'chats' },
@@ -21,7 +21,7 @@ const Sidemenu: React.FC = () => {
             const isRouteActive =
               item.href === '/'
                 ? pathname === item.href
-                : pathname.startsWith(item.href);
+                : pathname?.startsWith(item.href);
             return (
               <li key={item.label}>
                 <Link
