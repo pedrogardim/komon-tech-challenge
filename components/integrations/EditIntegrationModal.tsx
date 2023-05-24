@@ -6,6 +6,8 @@ import {
 } from '@/context/integrationsContext';
 import Modal from '../ui/Modal';
 import Input from '../ui/Input';
+import { editIntegration } from '@/services/integrations';
+import { useSnackbar } from '../ui/Snackbar';
 
 interface EditIntegrationModalProps {
   open: boolean;
@@ -23,21 +25,30 @@ const EditIntegrationModal: React.FC<EditIntegrationModalProps> = ({
   const [data, setData] = useState(integrations[itemIndex]);
   const [error, setError] = useState<string | null>(null);
 
+  const { openSnackbar } = useSnackbar();
+
   useEffect(() => {
     setData(integrations[itemIndex]);
   }, [integrations, itemIndex]);
 
-  const saveItem = () => {
+  const saveItem = async () => {
     if (!data.label.trim()) {
       setError('Label should not be empty');
       return;
     }
-    //TODO: Mock Endpoint
-    update((prev: IntegrationsCtxState) => {
-      const newState = { ...prev };
-      newState.integrations[itemIndex] = { ...data };
-    });
-    onClose();
+
+    try {
+      await editIntegration(data);
+      update((prev: IntegrationsCtxState) => {
+        const newState = { ...prev };
+        newState.integrations[itemIndex] = { ...data };
+      });
+      openSnackbar('Integration successfully edited');
+    } catch (e) {
+      openSnackbar((e as Error).message);
+    } finally {
+      onClose();
+    }
   };
 
   const updateValue = (key: string, value: string) => {

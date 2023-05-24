@@ -6,28 +6,41 @@ import {
   useIntegrationsContext,
   IntegrationsCtxState,
 } from '@/context/integrationsContext';
+import { deleteIntegration } from '@/services/integrations';
+
 import Modal from '@/components/ui/Modal';
 import IntegrationItem from '@/components/integrations/IntegrationItem';
 import EditIntegrationModal from '@/components/integrations/EditIntegrationModal';
+import { useSnackbar } from '@/components/ui/Snackbar';
+import Spinner from '@/components/ui/Spinner';
 
 const IntegrationsPage: React.FC = () => {
   const [deletingItem, setDeletingItem] = useState<null | string>(null);
   const [editingItem, setEditingItem] = useState<null | string>(null);
-  const { integrations, update } = useIntegrationsContext();
+  const { integrations, update, isLoading } = useIntegrationsContext();
+  const { openSnackbar } = useSnackbar();
 
-  const deleteItem = () => {
+  const deleteItem = async () => {
+    try {
+      await deleteIntegration(deletingItem as string);
+      update((prev: IntegrationsCtxState) => ({
+        integrations: prev.integrations.filter(
+          (item) => item.id !== deletingItem
+        ),
+      }));
+      openSnackbar('Integration succefully deleted');
+    } catch (e) {
+      openSnackbar((e as Error).message);
+    } finally {
+      setDeletingItem(null);
+    }
     //TODO: Mock DELETE Endpoint, move everything to hook
-    update((prev: IntegrationsCtxState) => ({
-      integrations: prev.integrations.filter(
-        (item) => item.id !== deletingItem
-      ),
-    }));
-    setDeletingItem(null);
   };
 
   return (
     <>
-      {integrations?.length === 0 && (
+      {isLoading && <Spinner />}
+      {integrations?.length === 0 && !isLoading && (
         <>
           <Image
             src="/illustrations/undraw_organize_photos_re_ogcy.svg"

@@ -8,9 +8,10 @@ export const fetchProfileData = async (type: string) =>
     }, 500);
   });
 
+//TODO: pagination / infinite scroll
 export const fetchPosts = async ({
   startAfter = 0,
-  items = 10,
+  items = 20,
   searchValue = '',
 }) =>
   new Promise<typeof mockPostsData>((resolve, reject) => {

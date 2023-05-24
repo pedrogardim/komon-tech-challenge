@@ -8,7 +8,10 @@ import {
   Integration,
 } from '@/context/integrationsContext';
 
+import { addIntegration } from '@/services/integrations';
+
 import { SocialProfile } from '@/data/mockProfileData';
+
 import Input from '@/components/ui/Input';
 import ProfileCard from '@/components/integrations/ProfileCard';
 import { useSnackbar } from '@/components/ui/Snackbar';
@@ -22,7 +25,7 @@ const NewConnectionPage: React.FC = () => {
 
   const data = newIntegration as Integration & SocialProfile;
 
-  const onAddConnection = () => {
+  const onAddConnection = async () => {
     if (!label.trim()) {
       setError('Label should not be empty');
       return;
@@ -37,13 +40,19 @@ const NewConnectionPage: React.FC = () => {
       setError('This account is already connected');
       return;
     }
-    //TODO: Mock PUT Endpoint
-    update((prev: IntegrationsCtxState) => ({
-      integrations: [...prev.integrations, newIntegration],
-      newIntegration: null,
-    }));
-    openSnackbar(`Integration added: ${newIntegration.label}`);
-    router.replace('/integrations');
+    try {
+      const res = await addIntegration(newIntegration);
+      update((prev: IntegrationsCtxState) => ({
+        integrations: [...prev.integrations, newIntegration],
+        newIntegration: null,
+      }));
+      openSnackbar(`Integration added: ${newIntegration.label}`);
+      router.replace('/integrations');
+    } catch (e) {
+      const error = e as Error;
+      setError(error.message);
+      openSnackbar(error.message);
+    }
   };
 
   const onCancel = () => {
