@@ -24,7 +24,7 @@ describe('Add integration', () => {
 
     cy.wait(2000);
 
-    cy.get('[data-cy="profile-card"]').should('exist');
+    cy.get('#profile-card').should('exist');
     cy.get('#label-input').type('Test Integration!');
     cy.get('#add-connection-btn').click();
 
@@ -49,7 +49,7 @@ describe('Create integration and repost integration post', () => {
 
     cy.wait(2000);
 
-    cy.get('[data-cy="profile-card"]').should('exist');
+    cy.get('#profile-card').should('exist');
     cy.get('#label-input').type('Test Integration!');
     cy.get('#add-connection-btn').click();
 
